@@ -1,0 +1,15 @@
+{
+	"name": "data-facotry-demo-project-01",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "germanywestcentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "53b022ed-1ad1-4e36-8b30-280ade883cb5",
+		"tenantId": "abeaf7b8-9423-466c-b170-278526c5709c"
+	}
+}
