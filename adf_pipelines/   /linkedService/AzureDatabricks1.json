@@ -14,10 +14,6 @@
 				"secretName": "dbwtoken"
 			},
 			"existingClusterId": "0614-212153-383uvcml-v2n"
-		},
-		"connectVia": {
-			"referenceName": "SHIR",
-			"type": "IntegrationRuntimeReference"
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
