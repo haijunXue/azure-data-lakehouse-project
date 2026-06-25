@@ -226,14 +226,9 @@
 						"secretName": "dbwtoken"
 					},
 					"existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
-				},
-				"connectVia": {
-					"referenceName": "SHIR",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/SHIR')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
 			]
 		},
