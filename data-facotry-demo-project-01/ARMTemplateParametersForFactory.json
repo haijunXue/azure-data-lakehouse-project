@@ -11,9 +11,6 @@
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://projectsadlsgen2demo.dfs.core.windows.net/"
 		},
-		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
-			"value": "0614-212153-383uvcml-v2n"
-		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"value": "https://key-vault-demo-proj-xhj.vault.azure.net/"
 		},

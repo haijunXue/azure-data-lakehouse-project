@@ -19,10 +19,6 @@
 			"type": "string",
 			"defaultValue": "https://key-vault-demo-proj-xhj.vault.azure.net/"
 		},
-		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
-			"type": "string",
-			"defaultValue": "0614-212153-383uvcml-v2n"
-		},
 		"onpremsqlserver_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "DESKTOP-F01SJ8U\\SQLEXPRESS"
@@ -223,9 +219,13 @@
 							"referenceName": "AzureKeyVault1",
 							"type": "LinkedServiceReference"
 						},
-						"secretName": "dbwtoken"
+						"secretName": "dfactory"
 					},
-					"existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+					"newClusterNodeType": "Standard_DS3_v2",
+					"newClusterNumOfWorker": "1",
+					"newClusterVersion": "10.4.x-scala2.12",
+					"clusterOption": "Fixed",
+					"newClusterInitScripts": []
 				}
 			},
 			"dependsOn": [
