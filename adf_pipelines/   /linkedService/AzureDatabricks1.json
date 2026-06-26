@@ -11,9 +11,13 @@
 					"referenceName": "AzureKeyVault1",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "dbwtoken"
+				"secretName": "dfactory"
 			},
-			"existingClusterId": "0614-212153-383uvcml-v2n"
+			"newClusterNodeType": "Standard_DS3_v2",
+			"newClusterNumOfWorker": "1",
+			"newClusterVersion": "10.4.x-scala2.12",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": []
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
