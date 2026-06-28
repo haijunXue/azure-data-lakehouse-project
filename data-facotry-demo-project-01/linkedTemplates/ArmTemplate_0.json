@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://key-vault-demo-proj-xhj.vault.azure.net/"
 		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0614-212153-383uvcml-v2n"
+		},
 		"onpremsqlserver_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "DESKTOP-F01SJ8U\\SQLEXPRESS"
@@ -221,67 +225,7 @@
 						},
 						"secretName": "dfactory"
 					},
-					"newClusterNodeType": "Standard_DS3_v2",
-					"newClusterNumOfWorker": "1",
-					"newClusterVersion": "10.4.x-scala2.12",
-					"clusterOption": "Fixed",
-					"newClusterInitScripts": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricks2')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-7405613739311199.19.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "dfactory"
-					},
-					"newClusterNodeType": "Standard_DS3_v2",
-					"newClusterNumOfWorker": "1",
-					"newClusterVersion": "10.4.x-scala2.12",
-					"clusterOption": "Fixed",
-					"newClusterInitScripts": []
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDatabricks3')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDatabricks",
-				"typeProperties": {
-					"domain": "https://adb-7405613739311199.19.azuredatabricks.net",
-					"accessToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "dfactory"
-					},
-					"newClusterNodeType": "Standard_DS3_v2",
-					"newClusterNumOfWorker": "1",
-					"newClusterVersion": "10.4.x-scala2.12",
-					"clusterOption": "Fixed",
-					"newClusterInitScripts": []
+					"existingClusterId": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": [
@@ -725,13 +669,13 @@
 						}
 					},
 					{
-						"name": "Bronze to Silver",
-						"type": "DatabricksNotebook",
+						"name": "data factory to azure databricks",
+						"type": "DatabricksJob",
 						"dependsOn": [
 							{
 								"activity": "ForEach1",
 								"dependencyConditions": [
-									"Succeeded"
+									"Skipped"
 								]
 							}
 						],
@@ -744,37 +688,10 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"notebookPath": "/Shared/01_bronze_to_silver.py"
+							"jobId": "424188638424215"
 						},
 						"linkedServiceName": {
-							"referenceName": "AzureDatabricks2",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "Silver to Gold",
-						"type": "DatabricksNotebook",
-						"dependsOn": [
-							{
-								"activity": "Bronze to Silver",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"notebookPath": "/Shared/02_silver_to_gold.py"
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureDatabricks3",
+							"referenceName": "AzureDatabricks1",
 							"type": "LinkedServiceReference"
 						}
 					}
@@ -787,8 +704,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SqlDBTables')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks2')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks3')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks1')]",
 				"[concat(variables('factoryId'), '/datasets/SqlServercopy')]",
 				"[concat(variables('factoryId'), '/datasets/parquetTable')]"
 			]
