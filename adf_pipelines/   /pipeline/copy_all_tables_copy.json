@@ -114,13 +114,13 @@
 				}
 			},
 			{
-				"name": "Bronze to Silver",
-				"type": "DatabricksNotebook",
+				"name": "data factory to azure databricks",
+				"type": "DatabricksJob",
 				"dependsOn": [
 					{
 						"activity": "ForEach1",
 						"dependencyConditions": [
-							"Succeeded"
+							"Skipped"
 						]
 					}
 				],
@@ -133,37 +133,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Shared/01_bronze_to_silver.py"
+					"jobId": "424188638424215"
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks2",
-					"type": "LinkedServiceReference"
-				}
-			},
-			{
-				"name": "Silver to Gold",
-				"type": "DatabricksNotebook",
-				"dependsOn": [
-					{
-						"activity": "Bronze to Silver",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"notebookPath": "/Shared/02_silver_to_gold.py"
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureDatabricks3",
+					"referenceName": "AzureDatabricks1",
 					"type": "LinkedServiceReference"
 				}
 			}
