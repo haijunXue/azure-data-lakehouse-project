@@ -12,7 +12,8 @@
 					"type": "LinkedServiceReference"
 				},
 				"secretName": "dfactory"
-			}
+			},
+			"existingClusterId": "0614-212153-383uvcml-v2n"
 		}
 	}
 }
